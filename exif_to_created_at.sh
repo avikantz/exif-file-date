@@ -16,6 +16,25 @@ do
 
 			SetFile -m "$formattedDate" "$f"
 			SetFile -d "$formattedDate" "$f"
+
+			# Check if live video files exist, update their dates as well
+			liveMP4File="$(echo "$f" | cut -f 1 -d '.').MP4"
+
+			if test -f "$liveMP4File"; then
+				echo ">> Setting $formattedDate to $liveMP4File"
+				SetFile -m "$formattedDate" "$liveMP4File"
+				SetFile -d "$formattedDate" "$liveMP4File"
+			fi
+
+			liveMOVFile="$(echo "$f" | cut -f 1 -d '.').MOV"
+
+			if test -f "$liveMOVFile"; then
+				echo ">> Setting $formattedDate to $liveMOVFile"
+				SetFile -m "$formattedDate" "$liveMOVFile"
+				SetFile -d "$formattedDate" "$liveMOVFile"
+			fi
+
+
 		else
 			echo "EXIF created date $exifDate not found"
 		fi
