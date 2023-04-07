@@ -3,7 +3,7 @@ do
     echo ">> Processing $f"
 
 	# Get exif date for the input
-	exifDate=$(mdls "$f" | grep 'kMDItemContentModificationDate' | awk '{print $3" "$4$5}')
+	exifDate=$(mdls "$f" | grep 'kMDItemContentCreationDate' | head -n1 | awk '{print $3" "$4$5}')
 
 	# Check for empty date
 	if [[ -n $exifDate ]]; then
